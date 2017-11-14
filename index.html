@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>osc.js Web Sockets</title>
+    <meta charset="UTF-8" />
+    <script src="bower_components/osc.js/dist/osc-browser.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        var port = new osc.WebSocketPort({
+          url: "ws://localhost:8081"
+        });
+
+        port.open();
+
+        $("div").click(function() {
+
+          port.send({
+            address: "/test/1",
+            args: [
+              {
+                type: "f",
+                value: Math.random()
+              },
+              {
+                type: "f",
+                value: Math.random()
+              }
+          ]});
+        });
+      });
+    </script>
+<style>
+div {
+  background-color: black;
+  width: 100px;
+  height: 100px;
+}
+</style>
+    </head>
+    <body>
+      <div></div>
+    </body>
+</html>

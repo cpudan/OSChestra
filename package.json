@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "osc": "2.2.0",
+    "supercolliderjs": "latest",
+    "http": "latest",
+    "ws": "latest",
+    "express": "latest",
+    "fs": "latest"
+  }
+}
