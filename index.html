@@ -3,42 +3,54 @@
   <head>
     <title>osc.js Web Sockets</title>
     <meta charset="UTF-8" />
+    <!--
+        <link rel="stylesheet" type="text/css" href="piano.css" />
+        <meta property="og:image" content="http://mrcoles.com/media/img/piano-visual-mode.png">
+        <link rel="image_src" href="http://mrcoles.com/media/img/piano-visual-mode.png" />
+    -->
     <script src="bower_components/osc.js/dist/osc-browser.min.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script>
+      var port = new osc.WebSocketPort({
+        url: "ws://"+window.location.hostname+":8081",
+      });
+      port.open();
+      var mkfreqmsg = function (f) {
+        var msg =  { 
+          address: "/test/1",
+          args: [{type: "f", value: f}]
+        };
+        return msg;
+      };
+console.log(mkfreqmsg(440));
       $(document).ready(function() {
-        var port = new osc.WebSocketPort({
-          url: "ws://localhost:8081"
+        $("#1").click(function() {
+          port.send(mkfreqmsg(440));
         });
-
-        port.open();
-
-        $("div").click(function() {
-
-          port.send({
-            address: "/test/1",
-            args: [
-              {
-                type: "f",
-                value: Math.random()
-              },
-              {
-                type: "f",
-                value: Math.random()
-              }
-          ]});
+        $("#2").click(function() {
+          port.send(mkfreqmsg(440*(2**(1/12))));
+        });
+        $("#3").click(function() {
+          port.send(mkfreqmsg(440*(2**(1/12)*2)));
+        });
+        $("#4").click(function() {
+          port.send(mkfreqmsg(440*(2**(1/12)*3)));
+        });
+        $("#5").click(function() {
+          port.send(mkfreqmsg(440*(2**(1/12)*4)));
+        });
+        $("#6").click(function() {
+          port.send(mkfreqmsg(440*(2**(1/12)*5)));
         });
       });
     </script>
-<style>
-div {
-  background-color: black;
-  width: 100px;
-  height: 100px;
-}
-</style>
     </head>
     <body>
-      <div></div>
+      <button id="1">1</button>
+      <button id="2">2</button>
+      <button id="3">3</button>
+      <button id="4">4</button>
+      <button id="5">5</button>
+      <button id="6">6</button>
     </body>
 </html>
