@@ -1,10 +1,14 @@
 {
   "dependencies": {
-    "osc": "2.2.0",
-    "supercolliderjs": "latest",
+    "bindings": "latest",
+    "express": "^4.16.2",
+    "fs": "latest",
     "http": "latest",
-    "ws": "latest",
-    "express": "latest",
-    "fs": "latest"
+    "node": "latest",
+    "os": "^0.1.1",
+    "osc": "^2.2.0",
+    "package.json": "^2.0.1",
+    "supercolliderjs": "latest",
+    "ws": "^3.3.2"
   }
 }

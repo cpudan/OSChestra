@@ -1,39 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset=utf-8>
-    <title>HTML5 JavaScript Piano - with Data URIs</title>
+    <meta charset=utf-8> <title>HTML5 JavaScript Piano - with Data URIs</title>
     <meta name="description" content="A synth piano synth that generates all of its audio files dynamically using JavaScript and data URIs. Choose from a variety of sounds styles and play with the looper, visual waveforms, and more." />
     <link rel="stylesheet" type="text/css" href="piano.css" />
     <meta property="og:image" content="http://mrcoles.com/media/img/piano-visual-mode.png">
     <link rel="image_src" href="http://mrcoles.com/media/img/piano-visual-mode.png" />
     <script src="bower_components/osc.js/dist/osc-browser.min.js"></script>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script>
-var port = new osc.websocketport({
-  url: "ws://"+window.location.hostname+":8081",
-});
-  port.open();
-  var mkfreqmsg = function (f) {
-  var msg =  { 
-  address: "/test/1",
-  args: [{type: "f", value: f}]
-};
-  return msg;
-};
-  $(document).ready(function() {
-  $("#b1").click(function() {
-    console.log('yup');
-  port.send(mkfreqmsg(440));
-});
-  $("#b2").click(function() {
-  port.send(mkfreqmsg(880));
-});
-  $("#b3").click(function() {
-  port.send(mkfreqmsg(440*3));
-});
-});
-    </script>
+    <!--<script src="bower_components/jquery/dist/jquery.min.js"></script>-->
   </head>
   <body>
     <div id="myshit">
@@ -66,9 +40,7 @@ var port = new osc.websocketport({
             </div>
           </div>
           <div class="loop" tabindex="2">loop</div>
-        </div>
-      </div>
-    </div>
+        </div> </div> </div>
     <div id="below">
       <p id="info">info</p>
       <p id="top">↑</p>
@@ -95,5 +67,30 @@ var port = new osc.websocketport({
     <script src="jquery-1.7.1.min.js"></script>
     <script src="audio.js"></script>
     <script src="piano.js"></script>
+    <script>
+      var port = new osc.WebSocketPort({
+        url: "ws://"+window.location.hostname+":8081",
+      });
+      port.open();
+      var mkfreqmsg = function (f) {
+        var msg =  { 
+          address: "/test/1",
+          args: [{type: "f", value: f}]
+        };
+        return msg;
+      };
+      $(document).ready(function() {
+        $("#b1").click(function() {
+          port.send(mkfreqmsg(220*(2**(0/12))));
+        });
+        $("#b2").click(function() {
+          port.send(mkfreqmsg(220*(2**(2/12))));
+        });
+        $("#b3").click(function() {
+          port.send(mkfreqmsg(220*(2**(4/12))));
+        });
+      });
+
+    </script>
   </body>
 </html>

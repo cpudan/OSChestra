@@ -1,7 +1,10 @@
-/*! Copyright (c) 2013 - Peter Coles (mrcoles.com)
+/*! 
+ *  Code adapted from Peter Coles by Daniel Meyer. I do not own any rights to
+ *  this code.
+ *  Copyright (c) 2013 - Peter Coles (mrcoles.com)
  *  Licensed under the MIT license: http://mrcoles.com/media/mit-license.txt
  */
-
+var keys;
 (function() {
 
     //
@@ -25,7 +28,7 @@
         return blackKeys[(i % 12) + (i < 0 ? 12 : 0)] || '';
     }
 
-    var $keys = $('<div>', {'class': 'keys'}).appendTo('#piano');
+    $keys = $('<div>', {'class': 'keys'}).appendTo('#piano');
 
     var buildingPiano = false;
 
